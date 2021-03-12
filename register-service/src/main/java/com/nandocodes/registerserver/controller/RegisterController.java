@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
     @GetMapping("nasa/register")
     public void getRegisterPage() {
-
+        
     }
 }
