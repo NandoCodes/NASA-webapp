@@ -117,7 +117,7 @@ class Register extends Component {
                     <FormControl
                       required
                       autoComplete="off"
-                      type="password2"
+                      type="password"
                       name="password2"
                       value={password2}
                       onChange={this.credentialChange}
