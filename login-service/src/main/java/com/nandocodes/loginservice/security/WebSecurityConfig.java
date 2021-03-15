@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/nasa/login/**").permitAll().and()
                 .authorizeRequests().antMatchers("/nasa/register/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/nasa/test/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
