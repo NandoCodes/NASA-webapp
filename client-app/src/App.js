@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
@@ -10,7 +11,7 @@ import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
-
+import ImageDay from "./components/ImageDay";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -29,52 +30,65 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
-
-          {currentUser && (
+      <Navbar className="navbar navbar-expand navbar-light bg-light">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="navbar-nav ml-auto" style={{ width: "80%" }}>
             <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
+              <Link to={"/home"} className="nav-link">
+                Home
               </Link>
             </li>
+
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  User
+                </Link>
+              </li>
+            )}
+            {currentUser && (
+              <NavDropdown title="Imagery" id="basic-nav-dropdown">
+                <Link to={"/imageDay"} className="nav-link">
+                  Image of the Day
+                </Link>
+                <Link to={"/searchImages"} className="nav-link">
+                  Search Images
+                </Link>
+              </NavDropdown>
+            )}
+          </Nav>
+
+          {currentUser ? (
+            <Nav className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/profile"} className="nav-link">
+                  {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={logOut}>
+                  Logout
+                </a>
+              </li>
+            </Nav>
+          ) : (
+            <Nav className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            </Nav>
           )}
-        </div>
-
-        {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                Logout
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
-                Login
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
-          </div>
-        )}
-      </nav>
+        </Navbar.Collapse>
+      </Navbar>
 
       <div className="container mt-3">
         <Switch>
@@ -83,6 +97,7 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
           <Route path="/user" component={BoardUser} />
+          <Route path="/imageDay" component={ImageDay} />
         </Switch>
       </div>
     </div>
