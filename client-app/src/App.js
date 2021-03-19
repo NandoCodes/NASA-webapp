@@ -29,7 +29,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div >
       <Navbar className="navbar navbar-expand navbar-light bg-light">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
