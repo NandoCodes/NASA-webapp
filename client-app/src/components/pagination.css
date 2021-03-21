@@ -1,16 +1,32 @@
+.mainContainer{
+    color:steelblue;
+    background-color:lightblue;
+    justify-content: center;
+}
+.randomImagesh2{
+    margin:auto;
+    margin-top:.5em;
+}
+
 .pageNumbers{
+   justify-content: center;
+   margin-top: 2em;
+}
+.pageNumbers ul{
     list-style:none;
     display:flex;
-    background-color:white;
 
 }
 .pageNumbers li{
     padding:10px;
     border:1px solid white;
     cursor:pointer;
+    font-weight: bold;
+    margin:0px auto 0px auto;
+    background-color: black;
 }
 .pageNumbers li button{
-    background-color:blue;
+    background-color:darkblue;
     border:none;
     color:white;
     font-size:1.5rem;
@@ -23,5 +39,5 @@ color:black;
     outline:none;
     }
 li.active{
-    background-color:grey;
+    background-color:lightblue;
 }

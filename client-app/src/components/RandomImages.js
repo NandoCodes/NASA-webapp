@@ -97,15 +97,15 @@ const RandomImages = () => {
   };
 
   return (
-    <Container style={{color:'SteelBlue', justifyContent:'center', backgroundColor:'lightBlue'}}>
-      <Row style={{justifyContent:'center'}}>
-      <h2 style={{color:'SteelBlue',display: 'flex'}}>Random Images</h2> <br />
+    <Container className="mainContainer">
+      <Row>
+      <h2 className="randomImagesh2">Random Images</h2> <br />
       </Row>
     
       {renderData(currentImages)}
       
-      <Row style={{justifyContent:'center'}}>
-      <ul className="pageNumbers">
+      <Row className="pageNumbers">
+      <ul>
         <li>
           <button
             onClick={handlePrevbtn}
@@ -119,8 +119,7 @@ const RandomImages = () => {
         <li>
           <button
             onClick={handleNextbtn}
-            disabled={currentPage == pages[pages.length - 1] ? true : false}
-          >
+            disabled={currentPage == pages[pages.length - 1] ? true : false}>
             Next
           </button>
         </li>
