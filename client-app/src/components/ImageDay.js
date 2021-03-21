@@ -27,9 +27,9 @@ const ImageDay = () => {
     <h2  style={{color:'SteelBlue',display: 'flex',  justifyContent:'center'}}>
       Image of the Day
     </h2>
-      <Card className="align-items-center" style={{ width: '100%',heigth:'80%' }}>
+      <Card className="align-items-center" style={{ heigth:'60%' }}>
   <Card.Img  variant="top" src={image} />
-  <Card.Body>
+  <Card.Body className="bg-light">
     <Card.Title>{title}</Card.Title>
     <Card.Text>
       {explanation}

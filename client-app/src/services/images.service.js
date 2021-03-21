@@ -11,7 +11,10 @@ const todayDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + tod
 const getNasaImage= () =>{ 
     return axios.get(`${NASA_URL}?api_key=${api_key}&date=${todayDate}`)};
 
+    const getNasaRandomImages= () =>{ 
+      return axios.get(`${NASA_URL}?api_key=${api_key}&count=100`)};
+
 
 export default {
-  getNasaImage
+  getNasaImage, getNasaRandomImages
 };
