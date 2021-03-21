@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import ImageDay from "./components/ImageDay";
+import RandomImages from "./components/RandomImages";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -30,7 +31,7 @@ const App = () => {
 
   return (
     <div >
-      <Navbar className="navbar navbar-expand navbar-light bg-light">
+      <Navbar className="navbar navbar-expand navbar-light bg-light font-weight-bolder">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navbar-nav ml-auto" style={{ width: "80%" }}>
@@ -98,6 +99,7 @@ const App = () => {
           <Route exact path="/profile" component={Profile} />
           <Route path="/user" component={BoardUser} />
           <Route path="/imageDay" component={ImageDay} />
+          <Route path="/randomImages" component={RandomImages} />
         </Switch>
       </div>
     </div>
