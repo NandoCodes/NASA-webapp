@@ -13,6 +13,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import ImageDay from "./components/ImageDay";
 import RandomImages from "./components/RandomImages";
+import SearchImages from "./components/SearchImages";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -100,6 +101,7 @@ const App = () => {
           <Route path="/user" component={BoardUser} />
           <Route path="/imageDay" component={ImageDay} />
           <Route path="/randomImages" component={RandomImages} />
+          <Route path="/searchImages" component={SearchImages} />
         </Switch>
       </div>
     </div>
