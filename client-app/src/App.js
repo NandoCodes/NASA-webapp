@@ -57,6 +57,9 @@ const App = () => {
                 <Link to={"/searchImages"} className="nav-link">
                   Search Images
                 </Link>
+                <Link to={"/randomImages"} className="nav-link">
+                  Random Images
+                </Link>
               </NavDropdown>
             )}
           </Nav>

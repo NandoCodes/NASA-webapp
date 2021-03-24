@@ -17,12 +17,15 @@ const getNasaRandomImages = () => {
   return axios.get(`${NASA_URL}?api_key=${api_key}&count=100`);
 };
 
-const getNasaImagesDates = (startDate,endDate) => {
-  return axios.get(`${NASA_URL}?api_key=${api_key}&start_date=${startDate}&end_date=${endDate}`);
+const getSearchedImages = (startDate,endDate) => {
+  const date1=startDate.format('YYYY-MM-DD');
+  const date2=endDate.format('YYYY-MM-DD');
+  console.log(date1+" "+date2);
+  return axios.get(`${NASA_URL}?api_key=${api_key}&start_date=${date1}&end_date=${date2}`);
 };
 
 export default {
   getNasaImage,
   getNasaRandomImages,
-  getNasaImagesDates
+  getSearchedImages
 };
