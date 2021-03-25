@@ -1,16 +1,5 @@
-.mainContainer{
-    color:steelblue;
-    background-color:lightblue;
-    justify-content: center;
-}
-.randomImagesh2{
-    margin:auto;
-    margin-top:.5em;
-}
-
 .pageNumbers{
    justify-content: center;
-   margin-top: 2em;
 }
 .pageNumbers ul{
     list-style:none;
