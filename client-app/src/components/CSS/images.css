@@ -1,0 +1,10 @@
+.mainContainer{
+    color:steelblue;
+    background-color:lightblue;
+    justify-content: center;
+}
+.mainContainer h2{
+    margin:auto;
+    margin-top:.5em;
+    margin-bottom:1em;
+}
