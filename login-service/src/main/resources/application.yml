@@ -1,0 +1,17 @@
+server:
+  port: 9000
+
+
+spring:
+  application:
+    name: AUTHENTICATION-SERVICE
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8084/eureka/
+  instance:
+    hostname: localhost
