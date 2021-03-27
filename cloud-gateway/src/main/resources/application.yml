@@ -1,0 +1,33 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      routes:
+        - id: AUTHENTICATION-SERVICE
+          uri: lb://AUTHENTICATION-SERVICE
+          predicates:
+            - Path=/nasa/auth/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: "*"
+
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8084/eureka/
+  instance:
+    hostname: localhost

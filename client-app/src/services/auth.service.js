@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:9000/nasa/";
+const API_URL = "http://localhost:9191/nasa/auth/";
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "register", {

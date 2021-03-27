@@ -5,5 +5,7 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+  server:
+    maxThreadsForPeerReplication: 0
 
 

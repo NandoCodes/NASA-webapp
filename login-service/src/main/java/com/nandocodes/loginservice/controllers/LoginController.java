@@ -14,7 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +32,8 @@ import com.nandocodes.loginservice.services.RoleService;
 import com.nandocodes.loginservice.services.UserService;
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/nasa")
+@RequestMapping("/nasa/auth/")
 public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -52,7 +50,7 @@ public class LoginController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -73,7 +71,7 @@ public class LoginController {
                 roles));
     }
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userService.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity

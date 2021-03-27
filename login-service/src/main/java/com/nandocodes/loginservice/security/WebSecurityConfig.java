@@ -53,9 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/nasa/login/**").permitAll().and()
-                .authorizeRequests().antMatchers("/nasa/register/**").permitAll()
-                .antMatchers("/nasa/test/**").permitAll()
+                .authorizeRequests().antMatchers("/nasa/auth/login/**").permitAll().and()
+                .authorizeRequests().antMatchers("/nasa/auth/register/**").permitAll()
+                .antMatchers("/nasa/auth/test/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
