@@ -6,6 +6,6 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
   server:
-    maxThreadsForPeerReplication: 0
+    maxThreadsForPeerReplication: 0s
 
 

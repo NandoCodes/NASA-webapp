@@ -7,21 +7,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${bezkoder.app.jwtSecret}")
+    @Value("${nandoCodes.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${bezkoder.app.jwtExpirationMs}")
+    @Value("${nandoCodes.jwtExpirationMs}")
     private int jwtExpirationMs;
 
 
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
+    public List<String> getAuthoritiesFromJwtToken(String token) {
+        List<String> authorities;
+        authorities=(List<String>) Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("authorities");
+        return authorities;
+    }
+
 
     public boolean validateJwtToken(String authToken) {
         try {
@@ -41,10 +49,5 @@ public class JwtUtils {
 
         return false;
     }
-
-    public String getJwtSecret() {
-        return jwtSecret;
-    }
-
 }
 

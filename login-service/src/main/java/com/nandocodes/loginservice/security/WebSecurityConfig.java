@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -48,9 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/nasa/auth/login/**").permitAll().and()
-                .authorizeRequests().antMatchers("/nasa/auth/register/**").permitAll()
-                .antMatchers("/nasa/auth/test/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/login/**").permitAll().and()
+                .authorizeRequests().antMatchers("/auth/register/**").permitAll()
                 .anyRequest().authenticated();
 
     }

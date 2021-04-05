@@ -33,7 +33,7 @@ import com.nandocodes.loginservice.services.UserService;
 
 
 @RestController
-@RequestMapping("/nasa/auth/")
+@RequestMapping("/auth/")
 public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;

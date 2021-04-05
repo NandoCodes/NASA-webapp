@@ -11,7 +11,11 @@ spring:
         - id: AUTHENTICATION-SERVICE
           uri: lb://AUTHENTICATION-SERVICE
           predicates:
-            - Path=/nasa/auth/**
+            - Path=/auth/**
+        - id: IMAGES-SERVICE
+          uri: lb://IMAGES-SERVICE
+          predicates:
+            - Path=/images/**
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -20,7 +24,6 @@ spring:
               - GET
               - POST
             allowedHeaders: "*"
-
 
 
 eureka:
