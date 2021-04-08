@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +38,7 @@ import com.nandocodes.loginservice.services.UserService;
 
 @RestController
 @RequestMapping("/auth/")
+@Api(value="REST API for login in and registering users.")
 public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -51,6 +56,12 @@ public class LoginController {
     JwtUtils jwtUtils;
 
     @PostMapping("login")
+    @ApiOperation(value = "Try and log in the user available in the database", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully logged in"),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 404, message = "Requested Resource Not Found")
+    })
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -72,6 +83,12 @@ public class LoginController {
     }
 
     @PostMapping("register")
+    @ApiOperation(value = "Try and register the user.", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully registered"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 404, message = "Requested Resource Not Found")
+    })
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userService.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
