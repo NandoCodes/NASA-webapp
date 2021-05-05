@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.nandocodes.loginservice.payloads.request.LoginRequest;
+import com.nandocodes.loginservice.payloads.request.SignupRequest;
+import com.nandocodes.loginservice.payloads.response.JwtResponse;
+import com.nandocodes.loginservice.payloads.response.MessageResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,10 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nandocodes.loginservice.models.ERole;
 import com.nandocodes.loginservice.models.Role;
 import com.nandocodes.loginservice.models.User;
-import com.nandocodes.loginservice.payloads.request.LoginRequest;
-import com.nandocodes.loginservice.payloads.request.SignupRequest;
-import com.nandocodes.loginservice.payloads.response.JwtResponse;
-import com.nandocodes.loginservice.payloads.response.MessageResponse;
+
+
 import com.nandocodes.loginservice.security.JwtUtils;
 import com.nandocodes.loginservice.security.UserDetailsImpl;
 import com.nandocodes.loginservice.services.RoleService;

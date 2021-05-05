@@ -1,10 +1,10 @@
 server:
   port: 9000
 
-
 spring:
   application:
     name: AUTHENTICATION-SERVICE
+  profiles.active: docker
 
 
 eureka:
@@ -15,3 +15,17 @@ eureka:
       defaultZone: http://localhost:8084/eureka/
   instance:
     hostname: localhost
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://registry:8084/eureka
+    fetch-registry: true
+
+
+

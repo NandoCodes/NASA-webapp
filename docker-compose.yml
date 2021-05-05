@@ -1,0 +1,52 @@
+version: '3'
+services:
+  react-front:
+    image: reactimage:latest
+    ports:
+      - 3000:3000
+    profiles:
+      - docker
+  registry:
+    image: registryimage:latest
+    ports:
+      - 8084:8084
+    profiles:
+      - docker
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+  gateway-service:
+    image: gatewayimage:latest
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://registry:8084/eureka
+      - "SPRING_PROFILES_ACTIVE=docker"
+    ports:
+      - 9191:9191
+    depends_on:
+      - registry
+    profiles:
+      - docker
+  db:
+    container_name: dbcontainer
+    image: 'mysql/mysql-server:5.7'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nasausers
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - '3301:3306'
+    restart: always
+    profiles:
+      - docker
+  login-service:
+    image: loginimage:latest
+    environment:
+      - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
+    ports:
+      - 9000:9000
+    depends_on:
+      - db
+      - registry
+    profiles:
+      - docker
+  
