@@ -6,6 +6,8 @@ services:
       - 3000:3000
     profiles:
       - docker
+    depends_on:
+      - gateway-service
   registry:
     image: registryimage:latest
     ports:
@@ -16,6 +18,7 @@ services:
       - "SPRING_PROFILES_ACTIVE=docker"
   gateway-service:
     image: gatewayimage:latest
+    container_name: gatewaycontainer
     environment:
       - JAVA_OPTS=
         -DEUREKA_SERVER=http://registry:8084/eureka
@@ -33,6 +36,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: nasausers
       MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./login-service/InsertData:/docker-entrypoint-initdb.d
     ports:
       - '3301:3306'
     restart: always
@@ -42,6 +47,7 @@ services:
     image: loginimage:latest
     environment:
       - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
+      - "SPRING_PROFILES_ACTIVE=docker"
     ports:
       - 9000:9000
     depends_on:
@@ -49,4 +55,14 @@ services:
       - registry
     profiles:
       - docker
-  
+  images-service:
+    image: imagesimage:latest
+    environment:
+      - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
+      - "SPRING_PROFILES_ACTIVE=docker"
+    ports:
+      - 9001:9001
+    depends_on:
+      - registry
+    profiles:
+      - docker

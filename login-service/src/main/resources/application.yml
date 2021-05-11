@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: AUTHENTICATION-SERVICE
-  profiles.active: docker
 
 
 eureka:
@@ -26,6 +25,8 @@ eureka:
     serviceUrl:
       defaultZone: http://registry:8084/eureka
     fetch-registry: true
+  instance:
+    preferIpAddress: true
 
 
 

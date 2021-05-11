@@ -5,12 +5,14 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:8084/eureka/
+    instance:
+      hostname: localhost
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: docker
+  profile: docker
 eureka:
   instance:
     prefer-ip-address: true

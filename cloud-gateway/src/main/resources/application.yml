@@ -19,7 +19,7 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "*"
+            allowedOrigins: "http://localhost:3000"
             allowedMethods:
               - GET
               - POST
@@ -32,6 +32,8 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8084/eureka/
+    instance:
+      hostname: localhost
 
 ---
 spring:
@@ -44,3 +46,5 @@ eureka:
     serviceUrl:
       defaultZone: http://registry:8084/eureka
     fetch-registry: true
+  instance:
+    preferIpAddress: true
