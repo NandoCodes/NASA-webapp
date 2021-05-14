@@ -1,25 +1,4 @@
 server:
   port: 8084
 
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://localhost:8084/eureka/
-    instance:
-      hostname: localhost
-
----
-spring:
-  profile: docker
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    registerWithEureka: false
-    serviceUrl:
-      defaultZone: http://registry:8084/eureka/
-    fetch-registry: false
-
 
