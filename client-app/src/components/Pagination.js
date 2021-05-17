@@ -64,33 +64,41 @@ const Pagination = ({ images }) => {
   const [isOpen,setIsOpen]=useState(false);
 
   const renderData = (images) => {
-    const arrRows = [];
+    const handleClick = (e) => {
+      openModal(e.currentTarget.src);
+    };
+      const arrRows = [];
     for (let i = 0; i < images.length; i++) {
       if (i % 2 != 0) {
         arrRows.push(
-          <Row key={i} className="mt-3">
-            <Col>
-              <img
-                src={images[i - 1].url}
-                style={{ width: "100%", height: "100%", cursor: "pointer" }} onClick={()=>setIsOpen(true)}
-              ></img>
-          <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={images[i-1].url}></Modal>
-            </Col>
-            <Col>
-              <img
-                src={images[i].url}
-                style={{ width: "100%", height: "100%", cursor: "pointer" }} onClick={()=>setIsOpen(true)}
-                ></img>
-            <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={images[i].url}></Modal>
-            </Col>
-          </Row>
-        );
-      }
-    }
-    return arrRows;
+      <Row key={i} className="mt-3">
+        <Col>
+          <img
+            src={images[i - 1].url}
+            style={{ width: "100%", height: "100%", cursor: "pointer" }}
+            onClick={handleClick}
+          />
+        </Col>
+        <Col>
+          <img
+            src={images[i].url}
+            style={{ width: "100%", height: "100%", cursor: "pointer" }}
+            onClick={handleClick}
+          />
+        </Col>
+      </Row>);
+  }}return arrRows;
+};
+
+const [latestClickedImage, setLatestClickedImage] = useState('');
+  const openModal = (url) => {
+    setIsOpen(true);
+    setLatestClickedImage(url);
   };
   return (
     <>
+    <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={latestClickedImage}></Modal>
+    
       {renderData(currentImages)}
 
       <Row className="pageNumbers">
