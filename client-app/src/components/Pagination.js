@@ -4,6 +4,8 @@ import "./CSS/pagination.css";
 
 import { Row, Col } from "react-bootstrap";
 
+import Modal from "./Modal";
+
 const Pagination = ({ images }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -59,6 +61,7 @@ const Pagination = ({ images }) => {
       setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
+  const [isOpen,setIsOpen]=useState(false);
 
   const renderData = (images) => {
     const arrRows = [];
@@ -69,14 +72,16 @@ const Pagination = ({ images }) => {
             <Col>
               <img
                 src={images[i - 1].url}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "100%", cursor: "pointer" }} onClick={()=>setIsOpen(true)}
               ></img>
+          <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={images[i-1].url}></Modal>
             </Col>
             <Col>
               <img
                 src={images[i].url}
-                style={{ width: "100%", height: "100%" }}
-              ></img>
+                style={{ width: "100%", height: "100%", cursor: "pointer" }} onClick={()=>setIsOpen(true)}
+                ></img>
+            <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={images[i].url}></Modal>
             </Col>
           </Row>
         );

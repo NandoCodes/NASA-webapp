@@ -67,6 +67,17 @@ services:
       - registry
     profiles:
       - docker
+   hystrix-service:
+    image: hystriximage:latest
+    environment:
+      - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
+      - "SPRING_PROFILES_ACTIVE=docker"
+    ports:
+      - 9295:9295
+    depends_on:
+      - registry
+    profiles:
+      - docker
 
 volumes:
   my-datavolume:
