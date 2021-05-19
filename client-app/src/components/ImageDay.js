@@ -9,15 +9,11 @@ import "./CSS/images.css";
 
 const ImageDay = () => {
   const [image, setImage] = useState("");
-  const [explanation, setExplanation] = useState("");
-  const [title, setTitle] = useState("");
 
   useEffect(() => {
     ImagesService.getNasaImage()
       .then((response) => {
-        setImage(response.data.url);
-        setTitle(response.data.title);
-        setExplanation(response.data.explanation);
+        setImage(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -30,11 +26,11 @@ const ImageDay = () => {
       </Row>
       <Row>
         <Card className="align-items-center" style={{ heigth: "60%" }}>
-          <Card.Img variant="top" src={image} style={{cursor: "pointer"}} onClick={()=> setIsOpen(true)} />
+          <Card.Img variant="top" src={image.url} style={{cursor: "pointer"}} onClick={()=> setIsOpen(true)} />
           <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={image}></Modal>
           <Card.Body className="bg-light">
-            <Card.Title>{title}</Card.Title>
-            <Card.Text>{explanation}</Card.Text>
+            <Card.Title>{image.title}</Card.Title>
+            <Card.Text>{image.explanation}</Card.Text>
           </Card.Body>
         </Card>
       </Row>
