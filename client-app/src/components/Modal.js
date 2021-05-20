@@ -1,13 +1,15 @@
 import ReactDom from "react-dom";
 
+import { Container, Row, Col } from "react-bootstrap";
+
 const POPUP_STYLES = {
   position: "fixed",
-  top: "50%",
+  top: "40%",
   left: "50%",
-  width: "40%",
-  height: "70%",
+  width: "60%",
+  height: "75%",
   transform: "translate(-50%, -50%)",
-  backgroundColor: "lightblue",
+  backgroundColor: "black",
   Zindex: 1000,
 };
 const OVERLAY_STYLES = {
@@ -26,18 +28,19 @@ const CLOSE_STYLES = {
   border: "none",
   color: "white",
   opacity: "0.5",
+  fontSize: "1.5em",
   ZIndex: 1001,
 };
 const IMAGE_STYLES = {
-  width: "100%",
-  height: "94%",
+  width: '100%',
+  height: '100%'
 };
 
 const FOOTER_STYLES = {
   display: "flex",
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  maxWidth: '7em',
+  flexDirection: "row",
+  justifyContent: "space-between",
+  maxWidth: "7em",
   height: "5%",
 };
 
@@ -45,20 +48,26 @@ function Modal({ open, image, onClose }) {
   if (!open) return null;
   return ReactDom.createPortal(
     <div style={OVERLAY_STYLES}>
-      <div style={POPUP_STYLES}>
-        <button style={CLOSE_STYLES} onClick={onClose}>
+      <Container style={POPUP_STYLES}>
+        <Row style={{height: '100%',width:'100%'}}>
+        <Col style={{height: '100%',width:'100%'}}>
+        <img src={image.url} style={IMAGE_STYLES}></img>
+        </Col>
+<Col style={{backgroundColor: 'whitesmoke'}}>
+<button style={CLOSE_STYLES} onClick={onClose}>
           X
         </button>
-        <img src={image} style={IMAGE_STYLES}></img>
-        <div style={FOOTER_STYLES}>
-          <div>
-            <button>Text</button>
-          </div>
-          <div>
-            <button>Share</button>
-          </div>
+        <div style={{color:'steelblue'}}>
+        <h2 >
+          {image.title}
+        </h2>
+        <p>
+          {image.explanation}
+        </p>
         </div>
-      </div>
+</Col>
+        </Row>
+      </Container>
     </div>,
     document.getElementById("portal")
   );
