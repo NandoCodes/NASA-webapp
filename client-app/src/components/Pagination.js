@@ -65,7 +65,8 @@ const Pagination = ({ images }) => {
 
   const renderData = (images) => {
     const handleClick = (e) => {
-      openModal(e.currentTarget.src);
+      console.log(e.currentTarget.getAttribute("myValue"));
+      openModal(e.currentTarget.getAttribute("myValue"));
     };
       const arrRows = [];
     for (let i = 0; i < images.length; i++) {
@@ -74,26 +75,26 @@ const Pagination = ({ images }) => {
       <Row key={i} className="mt-3">
         <Col>
           <img
-            src={images[i - 1].url}
+            src={images[i - 1].url} myValue={JSON.stringify(images[i-1])}
             style={{ width: "100%", height: "100%", cursor: "pointer" }}
-            onClick={handleClick}
-          />
+          onClick={handleClick}>
+          </img>
         </Col>
         <Col>
           <img
-            src={images[i].url}
+            src={images[i].url} myValue={JSON.stringify(images[i])}
             style={{ width: "100%", height: "100%", cursor: "pointer" }}
-            onClick={handleClick}
-          />
+            onClick={handleClick}>
+          </img>
         </Col>
       </Row>);
   }}return arrRows;
 };
 
-const [latestClickedImage, setLatestClickedImage] = useState('');
-  const openModal = (url) => {
+const [latestClickedImage, setLatestClickedImage] = useState([]);
+  const openModal = (image) => {
     setIsOpen(true);
-    setLatestClickedImage(url);
+    setLatestClickedImage(JSON.parse(image));
   };
   return (
     <>
