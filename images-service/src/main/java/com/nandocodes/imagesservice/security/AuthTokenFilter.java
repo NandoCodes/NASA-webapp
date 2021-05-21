@@ -37,6 +37,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 List<String> authorities = jwtUtils.getAuthoritiesFromJwtToken(jwt);
 
+                Number userId=jwtUtils.getUserIdFromJwtToken(jwt);
+                System.out.println(userId);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         username, null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
 

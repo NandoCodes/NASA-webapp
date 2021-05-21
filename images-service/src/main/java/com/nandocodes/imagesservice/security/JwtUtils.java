@@ -29,6 +29,10 @@ public class JwtUtils {
         authorities=(List<String>) Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("authorities");
         return authorities;
     }
+    public Number getUserIdFromJwtToken(String token)
+    {
+        return (Number) Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("userId");
+    }
 
 
     public boolean validateJwtToken(String authToken) {
