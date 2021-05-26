@@ -27,27 +27,45 @@ public class ImageController {
     @PostMapping("/saveImage")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity saveImage(@RequestBody ImageDto imageDto) {
-        if (imageService.existsByUrl(imageDto.getUrl())) {
-            return new ResponseEntity(HttpStatus.FOUND);
-        }
+        Long userId = getUserId();
+        Image image = new Image(imageDto.getTitle(),
+                imageDto.getExplanation(),
+                imageDto.getUrl(), userId);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LocalDate imageDate = imageDto.getDate();
+        image.setDate(imageDate);
 
-        if ((authentication instanceof UsernamePasswordAuthenticationToken)) {
-            Long userId = (Long) authentication.getCredentials();
+        imageService.save(image);
+        return new ResponseEntity(HttpStatus.CREATED);
 
-            Image image = new Image(imageDto.getTitle(),
-                    imageDto.getExplanation(),
-                    imageDto.getUrl(), userId);
-
-            LocalDate imageDate = imageDto.getDate();
-            image.setDate(imageDate);
-
-            imageService.save(image);
-            return new ResponseEntity(HttpStatus.CREATED);
-        } else
-            return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
+    @PostMapping("/deleteImage")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity deleteImage(@RequestBody ImageDto imageDto) {
+        Long userId = getUserId();
+        imageService.deleteByUserIdAndUrl(userId, imageDto.getUrl());
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
+    @PostMapping("/checkExists")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity checkImageExists(@RequestBody ImageDto imageDto) {
+        Long userId = getUserId();
+        if (userId != null && imageService.existsByUserIdAndUrl(userId, imageDto.getUrl())) {
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    private Long getUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if ((authentication instanceof UsernamePasswordAuthenticationToken)) {
+            Long userId = (Long) authentication.getCredentials();
+            return userId;
+        } else
+            return null;
+    }
 
 }

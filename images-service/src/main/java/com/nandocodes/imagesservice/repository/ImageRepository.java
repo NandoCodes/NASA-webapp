@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ImageRepository extends PagingAndSortingRepository<Image,Integer> {
 
-    boolean existsByUrl(String url);
+    boolean existsByUserIdAndUrl(Long userId, String url);
+
+    void deleteByUserIdAndUrl(Long userId, String url);
 }

@@ -19,6 +19,10 @@ public class Image {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    public Image()
+    {
+    }
+
     public Image(String title, String explanation, String url,Long userId) {
         this.title=title;
         this.explanation=explanation;
