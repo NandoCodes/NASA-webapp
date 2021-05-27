@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 
-import ImagesService from "../services/images.service";
+import ImagesService from "../services/nasa-api.service";
 import Pagination from "./Pagination";
 import "./CSS/images.css";
 

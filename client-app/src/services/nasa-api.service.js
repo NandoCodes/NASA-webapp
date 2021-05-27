@@ -1,7 +1,5 @@
 import axios from "axios";
-import authHeader from "./auth-header";
 
-const API_URL = "http://AUTHENTICATION-SERVICE/nasa/test/";
 const NASA_URL = "https://api.nasa.gov/planetary/apod";
 const api_key = "fPtAONuB5dsPgnfAMjBmN6pifyKhHcSHtIohgFLD";
 
