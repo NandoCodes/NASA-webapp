@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
@@ -26,8 +26,8 @@ public class ImageController {
 
     @PostMapping("/saveImage")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity saveImage(@RequestBody ImageDto imageDto) {
-        Long userId = getUserId();
+    public ResponseEntity saveImage(@Valid @RequestBody ImageDto imageDto) {
+        Integer userId = getUserId();
         Image image = new Image(imageDto.getTitle(),
                 imageDto.getExplanation(),
                 imageDto.getUrl(), userId);
@@ -42,8 +42,8 @@ public class ImageController {
 
     @PostMapping("/deleteImage")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity deleteImage(@RequestBody ImageDto imageDto) {
-        Long userId = getUserId();
+    public ResponseEntity deleteImage(@Valid@RequestBody ImageDto imageDto) {
+        Integer userId = getUserId();
         imageService.deleteByUserIdAndUrl(userId, imageDto.getUrl());
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -51,18 +51,18 @@ public class ImageController {
 
     @PostMapping("/checkExists")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity checkImageExists(@RequestBody ImageDto imageDto) {
-        Long userId = getUserId();
+    public ResponseEntity checkImageExists(@Valid@RequestBody ImageDto imageDto) {
+        Integer userId = getUserId();
         if (userId != null && imageService.existsByUserIdAndUrl(userId, imageDto.getUrl())) {
             return new ResponseEntity(HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    private Long getUserId() {
+    private Integer getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if ((authentication instanceof UsernamePasswordAuthenticationToken)) {
-            Long userId = (Long) authentication.getCredentials();
+            Integer userId = (Integer)authentication.getCredentials();
             return userId;
         } else
             return null;

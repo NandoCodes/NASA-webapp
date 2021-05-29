@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 
-import ImagesService from "../services/nasa-api.service";
+import NasaService from "../services/nasa-api.service";
 import Pagination from "./Pagination";
 import "./CSS/images.css";
 
@@ -22,7 +22,7 @@ const SearchImages = () => {
 
   useEffect(() => {
     if (startDate != null && endDate != null) {
-      ImagesService.getSearchedImages(startDate, endDate)
+      NasaService.getSearchedImages(startDate, endDate)
         .then((response) => {
           setImages(response.data);
         })

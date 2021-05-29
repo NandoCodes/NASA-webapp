@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 
-import ImagesService from "../services/nasa-api.service";
+import NasaService from "../services/nasa-api.service";
 import Modal from "./Modal";
 
 import "./CSS/images.css";
@@ -11,7 +11,7 @@ const ImageDay = () => {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    ImagesService.getNasaImage()
+    NasaService.getNasaImage()
       .then((response) => {
         setImage(response.data);
       })

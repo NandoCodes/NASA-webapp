@@ -15,7 +15,7 @@ public class Image {
     @Column(length = 3500)
     private String explanation;
     private String url;
-    private Long userId;
+    private Integer userId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
@@ -23,7 +23,7 @@ public class Image {
     {
     }
 
-    public Image(String title, String explanation, String url,Long userId) {
+    public Image(String title, String explanation, String url,Integer userId) {
         this.title=title;
         this.explanation=explanation;
         this.url=url;
@@ -55,11 +55,11 @@ public class Image {
         this.explanation = explanation;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

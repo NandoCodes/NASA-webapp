@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 
-import ImagesService from "../services/nasa-api.service";
+import NasaService from "../services/nasa-api.service";
 import Pagination from "./Pagination";
 
 import "./CSS/pagination.css";
@@ -11,7 +11,7 @@ const RandomImages = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    ImagesService.getNasaRandomImages()
+    NasaService.getNasaRandomImages()
       .then((response) => {
         setImages(response.data);
       })

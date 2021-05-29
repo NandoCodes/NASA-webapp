@@ -18,11 +18,11 @@ public class ImageService {
         return imageRepository.save(image);
     }
 
-    public boolean existsByUserIdAndUrl(Long userId, String url) {
+    public boolean existsByUserIdAndUrl(Integer userId, String url) {
         return imageRepository.existsByUserIdAndUrl(userId,url);
     }
 
-    public void deleteByUserIdAndUrl(Long userId, String url) {
+    public void deleteByUserIdAndUrl(Integer userId, String url) {
         imageRepository.deleteByUserIdAndUrl(userId,url);
     }
 }

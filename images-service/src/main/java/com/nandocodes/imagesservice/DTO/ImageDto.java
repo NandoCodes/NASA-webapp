@@ -49,4 +49,14 @@ public class ImageDto {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "ImageDto{" +
+                "title='" + title + '\'' +
+                ", explanation='" + explanation + '\'' +
+                ", url='" + url + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

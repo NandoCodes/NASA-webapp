@@ -1,6 +1,9 @@
 import ReactDom from "react-dom";
+import { useState} from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
+
+import ImageService from "../services/images.service";
 
 const POPUP_STYLES = {
   position: "fixed",
@@ -32,8 +35,8 @@ const CLOSE_STYLES = {
   ZIndex: 1001,
 };
 const IMAGE_STYLES = {
-  width: '100%',
-  height: '100%'
+  width: "100%",
+  height: "100%",
 };
 
 const FOOTER_STYLES = {
@@ -45,27 +48,33 @@ const FOOTER_STYLES = {
 };
 
 function Modal({ open, image, onClose }) {
+  const [exist, setExists] = useState(true);
+
   if (!open) return null;
+  const checkExists=ImageService.checkExistance(image).then(response => setExists(response));
+  
   return ReactDom.createPortal(
     <div style={OVERLAY_STYLES}>
       <Container style={POPUP_STYLES}>
-        <Row style={{height: '100%',width:'100%'}}>
-        <Col style={{height: '100%',width:'100%'}}>
-        <img src={image.url} style={IMAGE_STYLES}></img>
-        </Col>
-<Col style={{backgroundColor: 'whitesmoke'}}>
-<button style={CLOSE_STYLES} onClick={onClose}>
-          X
-        </button>
-        <div style={{color:'steelblue'}}>
-        <h2 >
-          {image.title}
-        </h2>
-        <p>
-          {image.explanation}
-        </p>
-        </div>
-</Col>
+        <Row style={{ height: "100%", width: "100%" }}>
+          <Col style={{ height: "100%", width: "100%" }}>
+            <img src={image.url} style={IMAGE_STYLES}></img>
+          </Col>
+          <Col style={{ backgroundColor: "whitesmoke" }}>
+            <button style={CLOSE_STYLES} onClick={onClose}>
+              X
+            </button>
+            <div style={{ color: "steelblue" }}>
+              <h2>{image.title}</h2>
+              <p>{image.explanation}</p>
+            </div>
+            <button
+              onClick={()=>exist ? ImageService.deleteImage(image) : ImageService.saveImage(image)}
+              style={{ backgroundColor: exist ? "red" : "green" }}
+            >
+              {exist ? "Delete" : "Save"}
+            </button>
+          </Col>
         </Row>
       </Container>
     </div>,
