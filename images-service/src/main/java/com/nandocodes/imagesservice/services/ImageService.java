@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,5 +26,9 @@ public class ImageService {
 
     public void deleteByUserIdAndUrl(Integer userId, String url) {
         imageRepository.deleteByUserIdAndUrl(userId,url);
+    }
+
+    public Optional<List<Image>> findAllByUserId(Integer userId) {
+        return imageRepository.findAllByUserId(userId);
     }
 }

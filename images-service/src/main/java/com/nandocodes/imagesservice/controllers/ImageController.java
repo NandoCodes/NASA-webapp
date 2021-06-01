@@ -11,11 +11,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/images")
@@ -57,6 +59,17 @@ public class ImageController {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+
+    @GetMapping("/getImages")
+    public ResponseEntity<List<Image>> getImages() {
+        Integer userId = getUserId();
+        if (userId==null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        List<Image> images=imageService.findAllByUserId(userId).get();
+        return new ResponseEntity<List<Image>>(images, HttpStatus.OK);
     }
 
     private Integer getUserId() {

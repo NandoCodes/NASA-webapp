@@ -14,6 +14,7 @@ import BoardUser from "./components/BoardUser";
 import ImageDay from "./components/ImageDay";
 import RandomImages from "./components/RandomImages";
 import SearchImages from "./components/SearchImages";
+import SavedImages from "./components/SavedImages";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -60,6 +61,9 @@ const App = () => {
                 <Link to={"/randomImages"} className="nav-link">
                   Random Images
                 </Link>
+                <Link to={"/savedImages"} className="nav-link">
+                  Saved Images
+                </Link>
               </NavDropdown>
             )}
           </Nav>
@@ -105,6 +109,7 @@ const App = () => {
           <Route path="/imageDay" component={ImageDay} />
           <Route path="/randomImages" component={RandomImages} />
           <Route path="/searchImages" component={SearchImages} />
+          <Route path="/savedImages" component={SavedImages} />
         </Switch>
       </div>
     </div>

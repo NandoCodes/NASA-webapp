@@ -78,4 +78,11 @@ public class Image {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }

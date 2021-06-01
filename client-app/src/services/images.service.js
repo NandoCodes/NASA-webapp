@@ -59,8 +59,13 @@ const deleteImage = (image) => {
     });
 };
 
+const getUserImages = () => {
+  return axios.get(GATEWAY_URL+"getImages",{ headers: authHeader() });
+};
+
 export default {
   checkExistance,
   saveImage,
   deleteImage,
+  getUserImages
 };
