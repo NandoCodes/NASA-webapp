@@ -61,45 +61,67 @@ const Pagination = ({ images }) => {
       setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
-  const [isOpen,setIsOpen]=useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const renderData = (images) => {
     const handleClick = (e) => {
       console.log(e.currentTarget.getAttribute("myValue"));
       openModal(e.currentTarget.getAttribute("myValue"));
     };
-      const arrRows = [];
+    const arrRows = [];
     for (let i = 0; i < images.length; i++) {
       if (i % 2 != 0) {
         arrRows.push(
-      <Row key={i} className="mt-3">
-        <Col>
-          <img
-            src={images[i - 1].url} myValue={JSON.stringify(images[i-1])}
-            style={{ width: "100%", height: "100%", cursor: "pointer" }}
-          onClick={handleClick}>
-          </img>
-        </Col>
-        <Col>
-          <img
-            src={images[i].url} myValue={JSON.stringify(images[i])}
-            style={{ width: "100%", height: "100%", cursor: "pointer" }}
-            onClick={handleClick}>
-          </img>
-        </Col>
-      </Row>);
-  }}return arrRows;
-};
+          <Row key={i} className="mt-3">
+            <Col>
+              <img
+                src={images[i - 1].url}
+                myvalue={JSON.stringify(images[i - 1])}
+                style={{ width: "100%", height: "100%", cursor: "pointer" }}
+                onClick={handleClick}
+              ></img>
+            </Col>
+            <Col>
+              <img
+                src={images[i].url}
+                myvalue={JSON.stringify(images[i])}
+                style={{ width: "100%", height: "100%", cursor: "pointer" }}
+                onClick={handleClick}
+              ></img>
+            </Col>
+          </Row>
+        );
+      } else if (i % 2 === 0 && ((i + 1) === images.length)) {
+        arrRows.push(
+        <Row key={i} className="mt-3">
+          <Col>
+            <img
+              src={images[i].url}
+              myvalue={JSON.stringify(images[i])}
+              style={{ width: "100%", height: "100%", cursor: "pointer" }}
+              onClick={handleClick}
+            ></img>
+          </Col>
+          <Col></Col>
+        </Row>);
+      }
+    }
+    return arrRows;
+  };
 
-const [latestClickedImage, setLatestClickedImage] = useState([]);
+  const [latestClickedImage, setLatestClickedImage] = useState([]);
   const openModal = (image) => {
     setIsOpen(true);
     setLatestClickedImage(JSON.parse(image));
   };
   return (
     <>
-    <Modal open={isOpen} onClose={()=>setIsOpen(false)} image={latestClickedImage}></Modal>
-    
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        image={latestClickedImage}
+      ></Modal>
+
       {renderData(currentImages)}
 
       <Row className="pageNumbers">
