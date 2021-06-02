@@ -3,6 +3,7 @@ package com.nandocodes.imagesservice.services;
 import com.nandocodes.imagesservice.models.Image;
 import com.nandocodes.imagesservice.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,7 +29,9 @@ public class ImageService {
         imageRepository.deleteByUserIdAndUrl(userId,url);
     }
 
-    public Optional<List<Image>> findAllByUserId(Integer userId) {
-        return imageRepository.findAllByUserId(userId);
+    public Optional<List<Image>> findAllByUserIdAndExplanationContains(Integer userId, String sortField, String keyword) {
+        Sort sort = Sort.by(sortField);
+        sort = sort.ascending();
+        return imageRepository.findAllByUserIdAndExplanationContains(userId,keyword,sort);
     }
 }

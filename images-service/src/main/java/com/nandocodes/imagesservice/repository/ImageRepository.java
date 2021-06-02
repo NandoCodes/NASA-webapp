@@ -1,6 +1,7 @@
 package com.nandocodes.imagesservice.repository;
 
 import com.nandocodes.imagesservice.models.Image;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,5 @@ public interface ImageRepository extends PagingAndSortingRepository<Image,Intege
 
     void deleteByUserIdAndUrl(Integer userId, String url);
 
-    Optional<List<Image>> findAllByUserId(Integer userId);
+    Optional<List<Image>> findAllByUserIdAndExplanationContains(Integer userId, String keyword, Sort sort);
 }
