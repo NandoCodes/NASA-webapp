@@ -1,32 +1,31 @@
-.pageNumbers{
-   justify-content: center;
+.pageNumbers {
+  justify-content: center;
 }
-.pageNumbers ul{
-    list-style:none;
-    display:flex;
-
+.pageNumbers ul {
+  list-style: none;
+  display: flex;
 }
-.pageNumbers li{
-    padding:10px;
-    border:1px solid white;
-    cursor:pointer;
-    font-weight: bold;
-    margin:0px auto 0px auto;
-    background-color: black;
+.pageNumbers li {
+  padding: 10px;
+  border: 1px solid white;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0px auto 0px auto;
+  background-color: black;
 }
-.pageNumbers li button{
-    background-color:darkblue;
-    border:none;
-    color:white;
-    font-size:1.5rem;
-    cursor:pointer;
+.pageNumbers li button {
+  background-color: darkblue;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
-.pageNumbers li button:hover{
-color:black;
+.pageNumbers li button:hover {
+  color: black;
 }
-.pageNumbers li button:focus{
-    outline:none;
-    }
-li.active{
-    background-color:lightblue;
+.pageNumbers li button:focus {
+  outline: none;
+}
+li.active {
+  background-color: lightblue;
 }

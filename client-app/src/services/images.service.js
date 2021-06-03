@@ -59,8 +59,8 @@ const deleteImage = (image) => {
     });
 };
 
-const getUserImages = () => {
-  return axios.get(GATEWAY_URL+"getImages",{ headers: authHeader() });
+const getUserImages = (keyword,sortField) => {
+  return axios.get(GATEWAY_URL+"getImages?sortField="+sortField+"&keyword="+keyword,{ headers: authHeader() });
 };
 
 export default {
