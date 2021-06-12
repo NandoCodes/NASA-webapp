@@ -116,7 +116,6 @@ public class LoginController {
             Role userRole = roleService.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
-            System.out.println("test");
         } else {
             strRoles.forEach(role -> {
                 switch (role) {

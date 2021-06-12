@@ -8,7 +8,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 public class LoginServiceApplication {
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(LoginServiceApplication.class, args);
 	}
