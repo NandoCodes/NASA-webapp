@@ -49,6 +49,8 @@ services:
     environment:
       - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
       - "SPRING_PROFILES_ACTIVE=docker"
+      - CONFIG_SERVICE_USR=${CONFIG_SERVICE_USR}
+      - CONFIG_SERVICE_PWD=${CONFIG_SERVICE_PWD}
     ports:
       - 9000:9000
     depends_on:
@@ -78,6 +80,18 @@ services:
       - registry
     profiles:
       - docker
+  config-service:
+    image: configimage:latest
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker,native"
+      - ENCRYPT_KEY=${CONFIG_SERVICE_ENCRYPT_KEY}
+      - SPRING_SECURITY_USER_NAME=${CONFIG_SERVICE_USR}
+      - SPRING_SECURITY_USER_PASSWORD=${CONFIG_SERVICE_PWD}
+    ports:
+      - 8888:8888
+    volumes:
+      - $PWD/config-repo:/config:repo
+    mem_limit: 350m
 
 volumes:
   my-datavolume:

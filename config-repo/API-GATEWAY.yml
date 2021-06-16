@@ -1,0 +1,29 @@
+server:
+  port: 9191
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: AUTHENTICATION-SERVICE
+          uri: lb://AUTHENTICATION-SERVICE
+          predicates:
+            - Path=/auth/**
+        - id: IMAGES-SERVICE
+          uri: lb://IMAGES-SERVICE
+          predicates:
+            - Path=/images/**
+        - id: CONFIG-SERVICE
+          uri: http://${app.config-server}:8888
+          predicates:
+            - Path=/config/**
+          filters:
+            - RewritePath=/config/(?<segment>.*), /$\{segment}
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: "*"
