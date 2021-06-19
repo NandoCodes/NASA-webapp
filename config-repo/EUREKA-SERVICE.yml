@@ -16,8 +16,6 @@ spring:
     activate:
       on-profile: docker
 eureka:
-  instance:
-    prefer-ip-address: true
   client:
     registerWithEureka: false
     serviceUrl:

@@ -17,6 +17,12 @@ services:
       - docker
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+      - CONFIG_SERVER_USR=${CONFIG_SERVER_USR}
+      - CONFIG_SERVER_PWD=${CONFIG_SERVER_PWD}
+    depends_on:
+      config-service:
+        condition: service_healthy
+    restart: on-failure
   gateway-service:
     image: gatewayimage:latest
     container_name: gatewaycontainer
@@ -24,10 +30,13 @@ services:
       - JAVA_OPTS=
         -DEUREKA_SERVER=http://registry:8084/eureka
       - "SPRING_PROFILES_ACTIVE=docker"
+      - CONFIG_SERVER_USR=${CONFIG_SERVER_USR}
+      - CONFIG_SERVER_PWD=${CONFIG_SERVER_PWD}
     ports:
       - 9191:9191
     depends_on:
       - registry
+      - config-service
     profiles:
       - docker
   db:
@@ -56,6 +65,7 @@ services:
     depends_on:
       - db
       - registry
+      - config-service
     profiles:
       - docker
   images-service:
@@ -63,21 +73,14 @@ services:
     environment:
       - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
       - "SPRING_PROFILES_ACTIVE=docker"
+      - CONFIG_SERVER_USR=${CONFIG_SERVER_USR}
+      - CONFIG_SERVER_PWD=${CONFIG_SERVER_PWD}
     ports:
       - 9001:9001
     depends_on:
       - registry
-    profiles:
-      - docker
-   hystrix-service:
-    image: hystriximage:latest
-    environment:
-      - JAVA_OPTS=-DEUREKA_SERVER=http://registry:8084/eureka
-      - "SPRING_PROFILES_ACTIVE=docker"
-    ports:
-      - 9295:9295
-    depends_on:
-      - registry
+      - db
+      - config-service
     profiles:
       - docker
   config-service:
@@ -90,8 +93,13 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - $PWD/config-repo:/config:repo
+      - C:/Users/Fernando/Desktop/git/NASA-webapp/config-repo:/config-repo
     mem_limit: 350m
+    profiles:
+      - docker
+    healthcheck:
+      test: "exit 0"
+
 
 volumes:
   my-datavolume:

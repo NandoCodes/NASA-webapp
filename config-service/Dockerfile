@@ -1,7 +1,4 @@
-FROM openjdk:12.0.2
-
-EXPOSE 8888
-
-ADD ./build/libs/*.jar app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM openjdk:12
+ADD target/*.jar app.jar
+ENV JAVA_OPTS=""
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
