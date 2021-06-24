@@ -21,10 +21,20 @@ spring:
           uri: lb://AUTHENTICATION-SERVICE
           predicates:
             - Path=/auth/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: authCircuitBreaker
+                fallbackUri: forward:/auth-fallback
         - id: IMAGES-SERVICE
           uri: lb://IMAGES-SERVICE
           predicates:
             - Path=/images/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: imagesCircuitBreaker
+                fallbackUri: forward:/images-fallback
         - id: CONFIG-SERVICE
           uri: http://${app.config-server}:8888
           predicates:
