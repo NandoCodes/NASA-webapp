@@ -2,6 +2,8 @@ app.config-server: localhost
 
 spring:
   application.name: AUTHENTICATION-SERVICE
+  zipkin:
+    base-url: http://localhost:9411/
   cloud.config:
     failFast: false
     retry:
@@ -16,5 +18,7 @@ spring:
   config:
     activate:
       on-profile: docker
+  zipkin:
+    base-url: http://zipkin:9411/
 
 app.config-server: config-service

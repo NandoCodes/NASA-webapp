@@ -99,7 +99,30 @@ services:
       - docker
     healthcheck:
       test: "exit 0"
-
+  rabbitmq:
+    image: rabbitmq:latest
+    mem_limit: 350m
+    profiles:
+      - docker
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: "exit 0"
+  zipkin:
+    image: openzipkin/zipkin:latest
+    environment:
+      - RABBIT_ADDRESSES=rabbitmq
+      - STORAGE_TYPE=mem
+    profiles:
+      - docker
+    mem_limit: 512m
+    ports:
+      - 9411:9411
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
 
 volumes:
   my-datavolume:
